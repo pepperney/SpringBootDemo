@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pepper.mapper.UserMapper">
+
+	<resultMap id="BaseResultMap" type="cn.pepper.model.User">
+		<id column="userid" jdbcType="INTEGER" property="userid" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="realname" jdbcType="VARCHAR" property="realname" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="mobile" jdbcType="INTEGER" property="mobile" />
+		<result column="qq" jdbcType="INTEGER" property="qq" />
+		<result column="openid" jdbcType="VARCHAR" property="openid" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+		<result column="usertype" jdbcType="INTEGER" property="usertype" />
+		<result column="userstatus" jdbcType="INTEGER" property="userstatus" />
+	</resultMap>
+	<insert id="insertUserThenRetunrId" parameterType="cn.pepper.model.User"	useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO	t_user(username,password)VALUES (#{username,jdbcType=VARCHAR},#{password, jdbcType=VARCHAR})
+	</insert>
+	 
+	<insert id="insertUser" parameterType="cn.pepper.model.User">
+		INSERT INTO	t_user(username,password)VALUES (#{username,jdbcType=VARCHAR},#{password, jdbcType=VARCHAR})
+	</insert>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+	   select userid,username,realname,password,email,mobile,qq,openid,nickname,headimgurl,usertype,userstatus 
+	   from t_user
+	</select>
+	
+	<select id="selectUserByUserid" resultMap="BaseResultMap">
+	   select userid,username,realname,password,email,mobile,qq,openid,nickname,headimgurl,usertype,userstatus 
+	   from t_user where userid = #{userid}
+	</select>
+</mapper>
