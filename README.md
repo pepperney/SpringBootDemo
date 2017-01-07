@@ -1,1 +1,1 @@
-### springboot整合mybatis,redis,使用druid数据源.
+### springboot鏁村悎mybatis锛宺edis锛屼娇鐢╠ruid鐨勬暟鎹簮
