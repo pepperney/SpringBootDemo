@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
-import cn.pepper.util.MyConstants;
+import cn.pepper.util.Constants;
 import cn.pepper.util.ReturnData;
 
 @RestController
@@ -36,7 +36,7 @@ public class RedisController {
     	logger.debug("【****************     testCache    has  begin       ***************】");
     	ReturnData<User> rd = new ReturnData<>();
     	User user = userService.findUser(1); 
-    	rd.setCode(MyConstants.SUCCESS);
+    	rd.setCode(Constants.SUCCESS);
     	rd.setMsg("success");
     	rd.setData(user);
     	logger.debug("【****************     testCache    has  end         ***************】");
