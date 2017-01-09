@@ -8,10 +8,8 @@ public interface UserService {
 
 	List<User> getUser();
 
-	public boolean addUser(User user);
+	User addUser(User user);
 
-	public User addUserWithBackId(String username);
-
-	User findUser(int i);
+	User findUserByUserid(int userid);
 
 }

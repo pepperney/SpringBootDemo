@@ -5,12 +5,17 @@ import java.util.List;
 import cn.pepper.model.User;
 
 public interface UserMapper {
+    int deleteByPrimaryKey(Integer userid);
 
-	public int insertUserThenReturnId(User user);
+    int insert(User record);
 
-	public List<User> selectAll();
+    int insertSelective(User record);
 
-	public int insertUser(User user);
+    User selectByPrimaryKey(Integer userid);
 
-	public User selectUserByUserid(int userid);
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+
+	List<User> selectAll();
 }

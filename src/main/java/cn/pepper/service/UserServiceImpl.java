@@ -21,28 +21,22 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
     
-    
+    @Override 
 	public List<User> getUser() {
 		return userMapper.selectAll();
 	}
-
-	public boolean addUser(User user) {
-		return userMapper.insertUser(user) == 1 ? true : false;
-	}
-
-	public User addUserWithBackId(String username) {
-		User user = new User();
-		user.setUsername(username);
-		userMapper.insertUserThenReturnId(user);
+    
+	@Override 
+	public User addUser(User user) {
+		userMapper.insertSelective(user);
 		return user;
 	}
 
-	
-	@Override
+	@Override  
 	@Cacheable(value = "usercache",keyGenerator = "wiselyKeyGenerator")  
-	public User findUser(int userid) {
+	public User findUserByUserid(int userid) {
 		logger.debug("--------> if you have seen this,it indicated that there is no cache");
-		return userMapper.selectUserByUserid(userid);
+		return userMapper.selectByPrimaryKey(userid);
 	}
 
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.pepper.model.User;
@@ -33,15 +32,15 @@ public class UserController {
 	 * @author niepei
 	 * @return
 	 */
-	@RequestMapping("/getUser")
+	@RequestMapping("/getAllUser")
 	public ReturnData<User>  getUser() {
-		logger.debug("【****************     getUser    has  begin       ***************】");
+		logger.debug("*****************     getUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
 		List<User> list = userService.getUser();
 		rd.setCode(Constants.SUCCESS);
 		rd.setMsg("success");
 		rd.setList(list);
-		logger.debug("【****************     getUser    has  end         ***************】");
+		logger.debug("*****************     getUser    has  end         ****************");
 		return rd;
 	}
 
@@ -52,28 +51,17 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/addUser")
-	public boolean addUser(@RequestBody User user) {
-		
-		return userService.addUser(user);
-	}
-
-	/**
-	 * 增加用户并返回用户id
-	 * @Description 
-	 * @author niepei
-	 * @param username
-	 * @return
-	 */
-	@RequestMapping(value = "/addUserThenReturnId", method = RequestMethod.POST)
-	public ReturnData<User> addUserWithBackId(@RequestParam("username") String username) {
-		logger.debug("【****************     addUserThenReturnId    has  begin       ***************】");
+	@RequestMapping(value = "/addUser",method = RequestMethod.POST)
+	public ReturnData<User> addUser(@RequestBody User user) {
+		logger.debug("*****************     addUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
-		User user = userService.addUserWithBackId(username);
+		User userInfo = userService.addUser(user);
 		rd.setCode(Constants.SUCCESS);
 		rd.setMsg("success");
-		rd.setData(user);
-		logger.debug("【****************     addUserThenReturnId    has  end         ***************】");
+		rd.setData(userInfo);
+		logger.debug("*****************     addUser    has  end         ****************");
 		return rd;
 	}
+
+	
 }
