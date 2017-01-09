@@ -1,7 +1,7 @@
-.git
-.settings
+*.git
+*.settings
 target
-.classpath
-.gitignore
-.project
+*.classpath
+*.gitignore
+*.project
 *.log
