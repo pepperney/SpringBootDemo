@@ -21,23 +21,6 @@ public class Conss {
 	public static final String GET_CODE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
 	public static final String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
 	
-	
-	//微信消息类型参数
-	public static final String MESSAGE_TEXT = "text";
-	public static final String MESSAGE_NEWS = "news";
-	public static final String MESSAGE_IMAGE = "image";
-	public static final String MESSAGE_VOICE = "voice";
-	public static final String MESSAGE_MUSIC = "music";
-	public static final String MESSAGE_VIDEO = "video";
-	public static final String MESSAGE_LINK = "link";
-	public static final String MESSAGE_LOCATION = "location";
-	public static final String MESSAGE_EVNET = "event";
-	public static final String MESSAGE_SUBSCRIBE = "subscribe";
-	public static final String MESSAGE_UNSUBSCRIBE = "unsubscribe";
-	public static final String MESSAGE_CLICK = "CLICK";
-	public static final String MESSAGE_VIEW = "VIEW";
-	public static final String MESSAGE_SCANCODE= "scancode_push";
-		
 	//验证码常量
 	public static final String SESSION_SECURITY_CODE = "sessionSecCode";
 	
