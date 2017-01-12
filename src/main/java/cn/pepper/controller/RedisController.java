@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
-import cn.pepper.util.Constants;
+import cn.pepper.util.Conss;
 import cn.pepper.util.ReturnData;
 
 @RestController
@@ -32,7 +32,7 @@ public class RedisController {
 		logger.debug("****************     testCache    has  begin       ***************");
 		ReturnData<User> rd = new ReturnData<>();
 		User user = userService.findUserByUserid(userid);
-		rd.setCode(Constants.SUCCESS);
+		rd.setCode(Conss.SUCCESS);
 		rd.setMsg("success");
 		rd.setData(user);
 		logger.debug("****************     testCache    has  end         ***************");

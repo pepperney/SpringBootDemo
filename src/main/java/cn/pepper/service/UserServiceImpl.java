@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import cn.pepper.mapper.UserMapper;
 import cn.pepper.model.User;
+import cn.pepper.util.Conss;
+import cn.pepper.util.MD5Util;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{
@@ -26,17 +28,26 @@ public class UserServiceImpl implements UserService{
 		return userMapper.selectAll();
 	}
     
-	@Override 
-	public User addUser(User user) {
-		userMapper.insertSelective(user);
-		return user;
-	}
-
 	@Override  
 	@Cacheable(value = "usercache",keyGenerator = "wiselyKeyGenerator")  
 	public User findUserByUserid(int userid) {
 		logger.debug("--------> if you have seen this,it indicated that there is no cache");
 		return userMapper.selectByPrimaryKey(userid);
+	}
+
+	@Override
+	public int addUser(User user) {
+		user.setPassword(MD5Util.getMD5ofStr(user.getUsername()+ "$$" + user.getPassword()));
+		user.setUsertype(Conss.USER_TYPE_COMMON);
+		return userMapper.insertSelective(user);
+	}
+
+	@Override
+	public User selectUser(String username, String password) {
+		password = MD5Util.getMD5ofStr(username+ "$$" + password);
+		User existUser = userMapper.selectByNameAndPwd(username,password);
+		logger.debug("----------------------------------->> " + existUser);
+		return existUser;
 	}
 
 }

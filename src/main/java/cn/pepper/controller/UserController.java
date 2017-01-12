@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
-import cn.pepper.util.Constants;
+import cn.pepper.util.Conss;
 import cn.pepper.util.ReturnData;
 
 
@@ -37,7 +37,7 @@ public class UserController {
 		logger.debug("*****************     getUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
 		List<User> list = userService.getUser();
-		rd.setCode(Constants.SUCCESS);
+		rd.setCode(Conss.SUCCESS);
 		rd.setMsg("success");
 		rd.setList(list);
 		logger.debug("*****************     getUser    has  end         ****************");
@@ -55,10 +55,9 @@ public class UserController {
 	public ReturnData<User> addUser(@RequestBody User user) {
 		logger.debug("*****************     addUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
-		User userInfo = userService.addUser(user);
-		rd.setCode(Constants.SUCCESS);
+		userService.addUser(user);
+		rd.setCode(Conss.SUCCESS);
 		rd.setMsg("success");
-		rd.setData(userInfo);
 		logger.debug("*****************     addUser    has  end         ****************");
 		return rd;
 	}

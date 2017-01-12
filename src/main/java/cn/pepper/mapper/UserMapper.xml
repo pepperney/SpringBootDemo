@@ -178,4 +178,9 @@
   <select id="selectAll" resultMap="BaseResultMap">
   select  <include refid="Base_Column_List" />   from t_user
   </select>
+  
+  <select id="selectByNameAndPwd" resultMap="BaseResultMap">
+  select  userid, username, realname, email, mobile, qq, openid, nickname, headimgurl, 
+  usertype, userstatus  from t_user where userid= #{userid} and password = #{password}
+  </select>
 </mapper>
