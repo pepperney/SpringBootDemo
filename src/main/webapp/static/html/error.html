@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<style type="text/css" media="screen">
+#key {
+	margin-top: 200px;
+	text-align: center;
+	font-size: 33px;
+}
+</style>
+
+<body>
+
+	<div id="key"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+	//将通过地址栏传过来的字符串参数转成一个json 对象；
+	function geturl_to_obj(str) {
+		var arr = {};
+		var canshu = str.split("?")[1] == undefined ? '' : str.split("?")[1];
+		if (canshu != '') {
+			var strarr = canshu.split("&");
+			for (i = 0; i < strarr.length; i++) {
+				var xx = strarr[i];
+				var mykey = xx.split('=')[0];
+				var myvalue = xx.split('=')[1];
+				arr[mykey] = myvalue;
+			}
+		}
+		return arr;
+
+	}
+	var obj = geturl_to_obj(location.href);
+	console.log(obj.key);
+	if (obj.key == -1) {
+		document.getElementById("key").innerHTML = "login fail,please check your username and password！";
+	} else if (obj.key == -2) {
+		document.getElementById("key").innerHTML = "sorry,maybe there are some little problems！";
+	} else if (obj.key == -3) {
+		
+	} else if (obj.key == -4) {
+	
+	}
+</script>

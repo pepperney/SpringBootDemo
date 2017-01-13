@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
@@ -40,11 +40,14 @@ public class LoginController {
 	 * @return
 	 * @throws MyException
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ReturnData<User> loginPost(HttpSession session, HttpServletRequest request, HttpServletResponse response,@RequestBody User user) throws MyException {
+	@RequestMapping(value = "/login")
+	public ModelAndView loginPost(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws MyException {
 		logger.debug("------------------------------------------------------   login  has start");
-		ReturnData<User> rd = new ReturnData<>();
-		User existUser = userService.selectUser(user.getUsername(), user.getPassword());
+		String url = request.getRequestURL().toString();
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		User existUser = userService.selectUser(username,password);
 		if (existUser != null) {
 			// 生成token并存入cookie
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -57,14 +60,12 @@ public class LoginController {
 			response.addCookie(cookie);
 			// 将当前用户存入session
 			session.setAttribute(session.getId(), existUser);
-			rd.setCode(Conss.SUCCESS);
-			rd.setMsg("login success!");
+			url = url.replace("login", "static/html/main.html");
 		} else {
-			rd.setCode(Conss.FAIL);
-			rd.setMsg("login fail!");
+			url = url.replace("login", "static/html/error.html?key=-1");
 		}
 		logger.debug("------------------------------------------------------   login  has  end");
-		return rd;
+		return new ModelAndView("redirect:"+url);
 	}
 
 	/**
@@ -91,7 +92,7 @@ public class LoginController {
 	 * @return
 	 * @throws MyException
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register")
 	public ReturnData<User> loginPost(@RequestBody User user) throws MyException {
 		logger.debug("------------------------------------------------------   register  has start");
 		ReturnData<User> rd = new ReturnData<>();

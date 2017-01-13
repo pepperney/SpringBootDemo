@@ -2,6 +2,8 @@ package cn.pepper.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.pepper.model.User;
 
 public interface UserMapper {
@@ -19,5 +21,5 @@ public interface UserMapper {
 
 	List<User> selectAll();
 
-	User selectByNameAndPwd(String username, String password);
+	User selectByNameAndPwd(@Param("username")String username, @Param("password")String password);
 }
