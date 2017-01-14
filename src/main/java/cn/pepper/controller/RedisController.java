@@ -32,7 +32,7 @@ public class RedisController {
 		logger.debug("****************     testCache    has  begin       ***************");
 		ReturnData<User> rd = new ReturnData<>();
 		User user = userService.findUserByUserid(userid);
-		rd.setCode(Conss.SUCCESS);
+		rd.setCode(Conss.YES);
 		rd.setMsg("success");
 		rd.setData(user);
 		logger.debug("****************     testCache    has  end         ***************");

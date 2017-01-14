@@ -33,8 +33,7 @@ public class MD5Util {
 	 * 
 	 */
 	private static long[] state = new long[4]; // state (ABCD)
-	private static long[] count = new long[2]; // number of bits, modulo 2^64 (lsb
-										// first)
+	private static long[] count = new long[2]; // number of bits, modulo 2^64
 	private static byte[] buffer = new byte[64]; // input buffer
 
 	/*
@@ -46,6 +45,12 @@ public class MD5Util {
 	 * digest,是最新一次计算结果的2进制内部表示，表示128bit的MD5值.
 	 */
 	private static byte[] digest = new byte[16];
+
+	// 这是MD5这个类的标准构造函数，JavaBean要求有一个public的并且没有参数的构造函数
+	public MD5Util() {
+		md5Init();
+		return;
+	}
 
 	/*
 	 * getMD5ofStr是类MD5最主要的公共方法，入口参数是你想要进行MD5变换的字符串
@@ -61,12 +66,6 @@ public class MD5Util {
 		}
 		return digestHexStr.toUpperCase();
 
-	}
-
-	// 这是MD5这个类的标准构造函数，JavaBean要求有一个public的并且没有参数的构造函数
-	public MD5Util() {
-		md5Init();
-		return;
 	}
 
 	/* md5Init是一个初始化函数，初始化核心变量，装入标准的幻数 */
@@ -149,9 +148,9 @@ public class MD5Util {
 		byte[] block = new byte[64];
 		index = (int) (count[0] >>> 3) & 0x3F;
 		// /* Update number of bits */
-		if ((count[0] += (inputLen << 3)) < (inputLen << 3)){
-			count[1]++;	
-		}	
+		if ((count[0] += (inputLen << 3)) < (inputLen << 3)) {
+			count[1]++;
+		}
 		count[1] += (inputLen >>> 29);
 		partLen = 64 - index;
 		// Transform as many times as possible.
@@ -164,10 +163,9 @@ public class MD5Util {
 			}
 			index = 0;
 
-		}
-		else
+		} else
 			i = 0;
-		// Buffer remaining input 
+		// Buffer remaining input
 		md5Memcpy(buffer, inbuf, index, i, inputLen - i);
 
 	}
@@ -179,18 +177,18 @@ public class MD5Util {
 		byte[] bits = new byte[8];
 		int index, padLen;
 
-		//  Save number of bits 
+		// Save number of bits
 		Encode(bits, count, 8);
 
-		//  Pad out to 56 mod 64.
+		// Pad out to 56 mod 64.
 		index = (int) (count[0] >>> 3) & 0x3f;
 		padLen = (index < 56) ? (56 - index) : (120 - index);
 		md5Update(PADDING, padLen);
 
-		//  Append length (before padding) 
+		// Append length (before padding)
 		md5Update(bits, 8);
 
-		//  Store state in digest 
+		// Store state in digest
 		Encode(digest, state, 16);
 
 	}
@@ -316,7 +314,8 @@ public class MD5Util {
 		int i, j;
 
 		for (i = 0, j = 0; j < len; i++, j += 4)
-			output[i] = b2iu(input[j]) | (b2iu(input[j + 1]) << 8) | (b2iu(input[j + 2]) << 16)	| (b2iu(input[j + 3]) << 24);
+			output[i] = b2iu(input[j]) | (b2iu(input[j + 1]) << 8) | (b2iu(input[j + 2]) << 16)
+					| (b2iu(input[j + 3]) << 24);
 
 		return;
 	}
@@ -341,19 +340,8 @@ public class MD5Util {
 		return s;
 	}
 
-	/*public static void main(String args[]){
-		if (Array.getLength(args) == 0) { // 如果没有参数，执行标准的Test Suite
-			System.out.println("MD5 Test suite:");
-			System.out.println("MD5(\"\"):" + MD5Util.getMD5ofStr("123456123456"));
-			System.out.println("MD5(\"a\"):" + MD5Util.getMD5ofStr("a"));
-			System.out.println("MD5(\"abc\"):" + MD5Util.getMD5ofStr("abc"));
-			System.out.println("MD5(\"message digest\"):" + MD5Util.getMD5ofStr("message digest"));
-			System.out.println("MD5(\"abcdefghijklmnopqrstuvwxyz\"):" + MD5Util.getMD5ofStr("abcdefghijklmnopqrstuvwxyz"));
-			System.out.println("MD5(\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\"):"+ MD5Util.getMD5ofStr("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"));
-		}
-		else
-			System.out.println("MD5(" + args[0] + ")=" + MD5Util.getMD5ofStr(args[0]));
-
-	}*/
+	
+	
+	 
 
 }

@@ -15,18 +15,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.pepper.model.MyException;
 import cn.pepper.model.User;
 
-
+/**
+ * 拦截器
+ * @Description 
+ * @author niepei
+ * @date 2017年1月14日 上午11:55:37 
+ * @version V1.3.1
+ */
 public class MyInterceptor implements HandlerInterceptor {
 
 	private static final Logger logger = Logger.getLogger(MyInterceptor.class);
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws MyException, IOException {
-
-		logger.debug("--------------------------------------------------------->>>>> MyInterceptor has begin  ");
+	
 		boolean flag = false;
-
 		String req_token = null;
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
@@ -55,7 +60,6 @@ public class MyInterceptor implements HandlerInterceptor {
 			}
 			
 		}
-		logger.debug("--------------------------------------------------------->>>>> MyInterceptor has end  ");
 		return flag;
 	}
 

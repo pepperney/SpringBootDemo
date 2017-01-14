@@ -3,25 +3,25 @@ package cn.pepper.util;
 import java.io.Serializable;
 import java.util.List;
 
-public class ReturnData<T> implements Serializable{
+public class ReturnData<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private String code;
-	
+
+	private Integer code;
+
 	private String msg;
-	
+
 	private Object data;
-	
+
 	private int count;
-	
+
 	private List<T> list;
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 
@@ -56,9 +56,5 @@ public class ReturnData<T> implements Serializable{
 	public void setList(List<T> list) {
 		this.list = list;
 	}
-	
-	
-	
-	
-	
+
 }

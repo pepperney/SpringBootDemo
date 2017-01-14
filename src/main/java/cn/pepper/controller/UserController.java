@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.pepper.model.MyException;
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
 import cn.pepper.util.Conss;
@@ -33,11 +33,11 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/getAllUser")
-	public ReturnData<User>  getUser() {
+	public ReturnData<User>  getUser() throws MyException{
 		logger.debug("*****************     getUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
 		List<User> list = userService.getUser();
-		rd.setCode(Conss.SUCCESS);
+		rd.setCode(Conss.YES);
 		rd.setMsg("success");
 		rd.setList(list);
 		logger.debug("*****************     getUser    has  end         ****************");
@@ -51,16 +51,23 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/addUser",method = RequestMethod.POST)
-	public ReturnData<User> addUser(@RequestBody User user) {
+	@RequestMapping(value = "/addUser")
+	public ReturnData<User> addUser(@RequestBody User user) throws MyException{
 		logger.debug("*****************     addUser    has  begin       ****************");
 		ReturnData<User> rd = new ReturnData<>();
 		userService.addUser(user);
-		rd.setCode(Conss.SUCCESS);
+		rd.setCode(Conss.YES);
 		rd.setMsg("success");
 		logger.debug("*****************     addUser    has  end         ****************");
 		return rd;
 	}
 
+	
+	@RequestMapping(value = "/testException")
+	public ReturnData<User> testException(@RequestBody User user) throws MyException {
+		logger.debug("*****************     testException    has  begin       ****************");
+		throw new MyException("error"); 
+		
+	}
 	
 }

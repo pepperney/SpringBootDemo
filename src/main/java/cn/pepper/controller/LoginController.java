@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.pepper.model.MyException;
 import cn.pepper.model.User;
 import cn.pepper.service.UserService;
 import cn.pepper.util.Conss;
 import cn.pepper.util.MD5Util;
-import cn.pepper.util.MyException;
 import cn.pepper.util.ReturnData;
 
 @RestController
+@RequestMapping(value = "/index")
 public class LoginController {
 
 	public static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -60,9 +61,9 @@ public class LoginController {
 			response.addCookie(cookie);
 			// 将当前用户存入session
 			session.setAttribute(session.getId(), existUser);
-			url = url.replace("login", "static/html/main.html");
+			url = url.replace("index/login", "static/html/main.html");
 		} else {
-			url = url.replace("login", "static/html/error.html?key=-1");
+			url = url.replace("index/login", "static/html/error.html?key=-1");
 		}
 		logger.debug("------------------------------------------------------   login  has  end");
 		return new ModelAndView("redirect:"+url);
@@ -79,7 +80,7 @@ public class LoginController {
 	public ReturnData<String> loginout(HttpServletRequest request) {
 		ReturnData<String> rd = new ReturnData<String>();
 		request.getSession().removeAttribute(request.getSession().getId());
-		rd.setCode(Conss.SUCCESS);
+		rd.setCode(Conss.NO);
 		rd.setMsg("logout success！");
 		return rd;
 	}
@@ -99,10 +100,10 @@ public class LoginController {
 		User existUser = userService.selectUser(user.getUsername(), user.getPassword());
 		if (existUser == null) {
 			int code = userService.addUser(user);
-			rd.setCode(Conss.SUCCESS);
+			rd.setCode(Conss.NO);
 			rd.setMsg(code > 0 ? "register success!" : "register failed!");
 		} else {
-			rd.setCode(Conss.FAIL);
+			rd.setCode(Conss.NO);
 			rd.setMsg("current user is exist!");
 		}
 		logger.debug("------------------------------------------------------   register  has  end");
