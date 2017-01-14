@@ -63,11 +63,4 @@ public class UserController {
 	}
 
 	
-	@RequestMapping(value = "/testException")
-	public ReturnData<User> testException(@RequestBody User user) throws MyException {
-		logger.debug("*****************     testException    has  begin       ****************");
-		throw new MyException("error"); 
-		
-	}
-	
 }
