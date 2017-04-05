@@ -42,7 +42,7 @@ public class LoginController {
 	 * @throws MyException
 	 */
 	@RequestMapping(value = "/login")
-	public ModelAndView loginPost(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws MyException {
+	public ModelAndView login(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws MyException {
 		logger.debug("------------------------------------------------------   login  has start");
 		String url = request.getRequestURL().toString();
 		
@@ -78,10 +78,12 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout")
 	public ReturnData<String> loginout(HttpServletRequest request) {
+		logger.debug("------------------------------------------------------   logout  has start");
 		ReturnData<String> rd = new ReturnData<String>();
 		request.getSession().removeAttribute(request.getSession().getId());
 		rd.setCode(Conss.NO);
 		rd.setMsg("logout success！");
+		logger.debug("------------------------------------------------------   logout  has end");
 		return rd;
 	}
 
@@ -94,7 +96,7 @@ public class LoginController {
 	 * @throws MyException
 	 */
 	@RequestMapping(value = "/register")
-	public ReturnData<User> loginPost(@RequestBody User user) throws MyException {
+	public ReturnData<User> register(@RequestBody User user) throws MyException {
 		logger.debug("------------------------------------------------------   register  has start");
 		ReturnData<User> rd = new ReturnData<>();
 		User existUser = userService.selectUser(user.getUsername(), user.getPassword());
