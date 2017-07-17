@@ -1,9 +1,7 @@
 package cn.pepper;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 
  
@@ -26,9 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2016年12月9日 上午11:20:06
  * @version V1.3.1
  */
-@ComponentScan
 @SpringBootApplication  
-@EnableAutoConfiguration
 public class Application {
 
 	public static void main(String[] args) {
