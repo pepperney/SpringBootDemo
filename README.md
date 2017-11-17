@@ -1,1 +1,1 @@
-### springboot整合mybatis，redis，使用druid的数据源
+### springboot整合mybatis的demo
