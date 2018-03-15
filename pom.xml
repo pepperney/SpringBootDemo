@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pepper</groupId>
-	<artifactId>SpringBootDemo</artifactId>
+	<artifactId>SpringBootWeb</artifactId>
 	<version>0.0.1-BETA</version>
 	<packaging>jar</packaging>
 
