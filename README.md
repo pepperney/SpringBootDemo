@@ -1,1 +1,2 @@
-### springboot整合mybatis的demo
+基于springboot实现传统的SSM项目
+使用maven构建
